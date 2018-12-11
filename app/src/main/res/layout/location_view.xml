@@ -32,6 +32,7 @@
                 android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="41dp"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:rating="1"
                 android:scaleX="0.4"

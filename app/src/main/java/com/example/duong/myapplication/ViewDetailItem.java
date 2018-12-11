@@ -25,10 +25,9 @@ public class ViewDetailItem  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_location);
 
-//               demo add list review
+//            create Listview and add into ReviewList
             ListView lvReviewList= (ListView) findViewById(R.id.dt_location);
             ArrayList<ReviewList> arrContact = new ArrayList<>();
-
 
 
             ReviewList review1 = new ReviewList("ToBi","My favorite drink is coffe and this place is very good for mixed coffee",5);
@@ -37,8 +36,18 @@ public class ViewDetailItem  extends AppCompatActivity {
             arrContact.add(review1);
             arrContact.add(review2);
 
+//            set content custom adapter
             CustomAdapterReview customAdaper = new CustomAdapterReview(this,R.layout.detail_location,arrContact);
             lvReviewList.setAdapter(customAdaper);
+
+//            declacre btn txt and catch event click
+            final TextView tvView= (TextView) findViewById(R.id.btn_addreview);
+
+            tvView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    startActivity(new Intent(ViewDetailItem.this, AddReview.class));
+                }
+            });
 
     }
 }

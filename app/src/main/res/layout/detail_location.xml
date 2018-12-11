@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:numStars="5"
+                android:isIndicator="true"
                 android:rating="1"
                 android:scaleX="0.6"
                 android:scaleY="0.6"
@@ -89,15 +90,30 @@
             android:layout_height="match_parent"
             android:layout_weight="15"
             android:orientation="vertical">
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/lobster"
-                android:text="Reviews"
-                android:textSize="20dp"
-                />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:paddingLeft="30dp"
+                    android:fontFamily="@font/lobster"
+                    android:text="Reviews"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:id="@+id/btn_addreview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lobster"
+                    android:paddingRight="30dp"
+                    android:text="Add Review"
+                    android:layout_alignParentRight="true"
+                    android:textSize="20dp"
+                    />
+            </RelativeLayout>
+
             <ListView
                 android:id="@+id/dt_location"
                 android:layout_width="wrap_content"

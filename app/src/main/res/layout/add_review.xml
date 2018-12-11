@@ -73,6 +73,13 @@
                 android:layout_height="100dp"
                 android:background="@drawable/shape" />
 
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster"
+                android:text="Send" />
+
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

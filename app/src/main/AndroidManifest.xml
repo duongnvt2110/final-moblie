@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".ViewDetailItem"></activity>
         <activity android:name=".ViewLocationItem"></activity>
-
+        <activity android:name=".AddReview"></activity>
     </application>
 
 </manifest>

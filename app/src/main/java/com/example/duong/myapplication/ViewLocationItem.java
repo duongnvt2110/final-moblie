@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class ViewLocationItem  extends AppCompatActivity {
         arrContact.add(location6);
         arrContact.add(location7);
 
-        CustomAdapter customAdaper = new CustomAdapter(this, R.layout.location_view, arrContact);
+        CustomAdapter customAdaper = new CustomAdapter(ViewLocationItem.this, R.layout.location_view, arrContact);
         locationList.setAdapter(customAdaper);
 
 
@@ -54,9 +55,11 @@ public class ViewLocationItem  extends AppCompatActivity {
         locationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(ViewLocationItem.this, "Button 1 clicked", Toast.LENGTH_SHORT).show();
                 String itemChosen = (String) parent.getItemAtPosition(position);
                 Intent intent = new Intent(ViewLocationItem.this, ViewDetailItem.class);
-                intent.putExtra("groceryItem", itemChosen);
+                view.setSelected(true);
                 startActivity(intent);
             }
         });
