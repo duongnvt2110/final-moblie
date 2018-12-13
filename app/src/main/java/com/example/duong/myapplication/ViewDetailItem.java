@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Button;
+
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.duong.myapplication.LocationList;
@@ -28,6 +30,16 @@ public class ViewDetailItem  extends AppCompatActivity {
 //            create Listview and add into ReviewList
             ListView lvReviewList= (ListView) findViewById(R.id.dt_location);
             ArrayList<ReviewList> arrContact = new ArrayList<>();
+
+            Intent intent = getIntent();
+            final String Name = intent.getStringExtra("name");
+            final String Hour = intent.getStringExtra("hour");
+
+            final TextView txtName= (TextView) findViewById(R.id.txt_name);
+            final TextView txtHour= (TextView) findViewById(R.id.txt_hour);
+            txtName.setText(Name);
+            txtHour.setText(Hour);
+
 
 
             ReviewList review1 = new ReviewList("ToBi","My favorite drink is coffe and this place is very good for mixed coffee",5);
@@ -45,7 +57,9 @@ public class ViewDetailItem  extends AppCompatActivity {
 
             tvView.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    startActivity(new Intent(ViewDetailItem.this, AddReview.class));
+
+                    Intent Intent = new Intent(ViewDetailItem.this, AddReview.class);
+                    startActivity(Intent);
                 }
             });
 

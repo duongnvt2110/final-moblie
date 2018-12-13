@@ -58,9 +58,11 @@ public class ViewLocationItem  extends AppCompatActivity {
 
                 Toast.makeText(ViewLocationItem.this, "Button 1 clicked", Toast.LENGTH_SHORT).show();
                 String itemChosen = (String) parent.getItemAtPosition(position);
-                Intent intent = new Intent(ViewLocationItem.this, ViewDetailItem.class);
+                Intent Intent = new Intent(ViewLocationItem.this, ViewDetailItem.class);
                 view.setSelected(true);
-                startActivity(intent);
+                Intent.putExtra("hour","Monday 7 a.m-10 p.m");
+                Intent.putExtra("name","Local Coffee");
+                startActivity(Intent);
             }
         });
     }
