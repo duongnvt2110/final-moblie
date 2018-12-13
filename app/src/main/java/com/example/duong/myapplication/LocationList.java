@@ -10,13 +10,15 @@ public class LocationList {
         private String name;
         private String address;
         private float rating;
+        private String distance;
 
 
-    public LocationList(int image,String name, String address, int rating) {
+    public LocationList(int image,String name, String address, int rating, String distance) {
             this.image = image;
             this.name = name;
             this.address = address;
             this.rating = rating;
+            this.distance= distance;
         }
 
         public String getName() {
@@ -50,5 +52,13 @@ public class LocationList {
 
         public void setImage(int image) {
             this.image = image;
+        }
+
+        public String getDistance() {
+            return distance;
+        }
+
+        public void setDistance(String distance) {
+            this.distance = distance;
         }
     }

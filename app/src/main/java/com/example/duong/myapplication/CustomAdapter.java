@@ -38,6 +38,7 @@ public class CustomAdapter extends ArrayAdapter<LocationList> {
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.address = (TextView) convertView.findViewById(R.id.address);
             viewHolder.rating = (RatingBar) convertView.findViewById(R.id.rating);
+            viewHolder.distance = (TextView) convertView.findViewById(R.id.txt_distance);
 
             convertView.setTag(viewHolder);
         } else {
@@ -49,11 +50,12 @@ public class CustomAdapter extends ArrayAdapter<LocationList> {
         viewHolder.address.setText(locationList.getAddress());
         viewHolder.rating.setTag(position);
         viewHolder.rating.setRating(locationList.getRating());
+        viewHolder.name.setText(locationList.getName());
         return convertView;
     }
 
     public class ViewHolder {
-        TextView name, address;
+        TextView name, address,distance;
         RatingBar rating;
         ImageView image;
     }

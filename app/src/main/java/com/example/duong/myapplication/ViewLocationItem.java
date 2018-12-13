@@ -34,11 +34,11 @@ public class ViewLocationItem  extends AppCompatActivity {
 
         int id = getResources().getIdentifier("coffee", "drawable", getPackageName());
 
-        LocationList location3 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2);
-        LocationList location4 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2);
-        LocationList location5 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2);
-        LocationList location6 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2);
-        LocationList location7 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2);
+        LocationList location3 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
+        LocationList location4 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
+        LocationList location5 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
+        LocationList location6 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
+        LocationList location7 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
 
         arrContact.add(location3);
         arrContact.add(location4);
