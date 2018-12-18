@@ -1,28 +1,32 @@
 package com.example.duong.myapplication;
 
-import android.os.Bundle;
+
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import android.widget.Button;
-import android.widget.AdapterView;
+
+import com.example.duong.myapplication.utils.QueryUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.example.duong.myapplication.LocationList;
 
 public class ViewLocationItem  extends AppCompatActivity {
+    CustomAdapter customAdaper = null;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.updateLocation();
+    }
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,19 +38,7 @@ public class ViewLocationItem  extends AppCompatActivity {
 
         int id = getResources().getIdentifier("coffee", "drawable", getPackageName());
 
-        LocationList location3 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
-        LocationList location4 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
-        LocationList location5 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
-        LocationList location6 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
-        LocationList location7 = new LocationList(R.drawable.coffee, "Local Coffee", "Phường Linh Trung - Thủ Đức HCM", 2,"200m");
-
-        arrContact.add(location3);
-        arrContact.add(location4);
-        arrContact.add(location5);
-        arrContact.add(location6);
-        arrContact.add(location7);
-
-        CustomAdapter customAdaper = new CustomAdapter(ViewLocationItem.this, R.layout.location_view, arrContact);
+        customAdaper = new CustomAdapter(ViewLocationItem.this, R.layout.location_view, arrContact);
         locationList.setAdapter(customAdaper);
 
 
@@ -57,11 +49,44 @@ public class ViewLocationItem  extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Toast.makeText(ViewLocationItem.this, "Button 1 clicked", Toast.LENGTH_SHORT).show();
-                String itemChosen = (String) parent.getItemAtPosition(position);
-                Intent intent = new Intent(ViewLocationItem.this, ViewDetailItem.class);
+                LocationList itemChosen = (LocationList) parent.getItemAtPosition(position);
+                Intent Intent = new Intent(ViewLocationItem.this, ViewDetailItem.class);
                 view.setSelected(true);
-                startActivity(intent);
+                Intent.putExtra("hour","Monday 7 a.m-10 p.m");
+                Intent.putExtra("name","Local Coffee");
+                Intent.putExtra("id",itemChosen.getId());
+                startActivity(Intent);
             }
         });
+    }
+    private void updateLocation()
+    {
+        FecthLocationTask task = new FecthLocationTask();
+        task.execute();
+    }
+
+
+    public class FecthLocationTask extends AsyncTask<String, Void, List<LocationList>>
+    {
+
+
+        @Override
+        protected List<LocationList> doInBackground(String... params) {
+            return QueryUtils.fetchLocationData();
+        }
+
+        @Override
+        protected void onPostExecute(List<LocationList> data) {
+            if(data == null || data.isEmpty())
+            {
+                return;
+            }
+            else
+            {
+                customAdaper.addAll(data);
+
+            }
+
+        }
     }
 }

@@ -1,19 +1,41 @@
 package com.example.duong.myapplication;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
 public class LocationList {
-        private int image;
+        private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public LocationList(String id, String name, String address, float rating) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.rating = rating;
+    }
+
+    public LocationList(String id, int image, String name, String address, float rating, int distance) {
+
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.address = address;
+        this.rating = rating;
+        this.distance = distance;
+    }
+
+    private int image;
         private String name;
         private String address;
         private float rating;
-        private String distance;
+        private int distance;
 
 
-    public LocationList(int image,String name, String address, int rating, String distance) {
+    public LocationList(int image,String name, String address, int rating, int distance) {
             this.image = image;
             this.name = name;
             this.address = address;
@@ -54,11 +76,11 @@ public class LocationList {
             this.image = image;
         }
 
-        public String getDistance() {
+        public int getDistance() {
             return distance;
         }
 
-        public void setDistance(String distance) {
+        public void setDistance(int distance) {
             this.distance = distance;
         }
     }
