@@ -49,6 +49,35 @@ public class QueryUtils {
         return locations;
     }
 
+    public static LocationList fetchDetailLocationData(String id)
+    {
+        LocationList location = null;
+        String requestUrl = "http://206.189.80.94:8000/api/locations/"+id;
+        Log.d("Url", requestUrl);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        URL url = createURL(requestUrl);
+        String jsonReponse = null;
+        try {
+            jsonReponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error closing input stream", e);
+        }
+        Log.d("JSON: " , jsonReponse);
+
+        try {
+            location = getDetailLocation(jsonReponse);
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error getting data from JSON");
+        }
+        Log.d("Data",location.toString());
+        return location;
+    }
+
     public static URL createURL(String requestString)
     {
         URL url = null;
@@ -151,6 +180,31 @@ public class QueryUtils {
             Log.v(LOG_TAG, "Forecast entry: " + s);
         }
         return results;
+    }
+    private static LocationList getDetailLocation(String locationJsonStr)
+            throws JSONException {
+
+        final String OWM_LIST = "list";
+        final String OWM_WEATHER = "weather";
+        final String OWM_TEMPERATURE = "temp";
+        final String OWM_MAX = "max";
+        final String OWM_MIN = "min";
+        final String OWM_DESCRIPTION = "main";
+
+        final String OWM_ITEMS = "items";
+        final String OWM_DATA = "data";
+        final String OWN_STATUS = "status";
+        final String OWN_TOTAL = "total";
+
+        JSONObject locationObject = new JSONObject(locationJsonStr);
+            String id = locationObject.getString("_id");
+            String name = locationObject.getString("name");
+            Integer rating = locationObject.getInt("rating");
+            String address = locationObject.getString("address");
+
+            LocationList location = new LocationList(id, R.drawable.coffee, name, address, rating, 100);
+
+        return location;
     }
 
 }

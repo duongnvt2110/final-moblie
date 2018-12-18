@@ -1,27 +1,26 @@
 package com.example.duong.myapplication;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Button;
 
-import java.net.Inet4Address;
+import com.example.duong.myapplication.utils.QueryUtils;
+
 import java.util.ArrayList;
-import java.util.List;
-import com.example.duong.myapplication.LocationList;
 
 public class ViewDetailItem  extends AppCompatActivity {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        final String id = intent.getStringExtra("id");
+        this.getDetailLocation(id);
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,5 +62,36 @@ public class ViewDetailItem  extends AppCompatActivity {
                 }
             });
 
+    }
+    private void getDetailLocation(String id)
+    {
+        FecthDetailLocationTask task = new FecthDetailLocationTask();
+        task.execute(id);
+    }
+
+
+    public class FecthDetailLocationTask extends AsyncTask<String, Void, LocationList>
+    {
+
+
+        @Override
+        protected LocationList doInBackground(String... params) {
+            String id = params[0];
+            return QueryUtils.fetchDetailLocationData(id);
+        }
+
+        @Override
+        protected void onPostExecute(LocationList data) {
+            if(data == null)
+            {
+                return;
+            }
+            else
+            {
+                Log.d("Detail", data.toString());
+
+            }
+
+        }
     }
 }
