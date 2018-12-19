@@ -15,6 +15,7 @@ import com.example.duong.myapplication.utils.QueryUtils;
 import java.util.ArrayList;
 
 public class ViewDetailItem  extends AppCompatActivity {
+    CustomAdapterReview customAdaper;
 
     @Override
     protected void onStart() {
@@ -34,6 +35,9 @@ public class ViewDetailItem  extends AppCompatActivity {
         rbRating.setRating(location.getRating());
         txtHour.setText(location.getOpeningTime());
 
+        ArrayList<ReviewList> reviews = location.getReviews();
+
+        customAdaper.addAll(reviews);
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +48,8 @@ public class ViewDetailItem  extends AppCompatActivity {
             ListView lvReviewList= (ListView) findViewById(R.id.dt_location);
             ArrayList<ReviewList> arrContact = new ArrayList<>();
 
-
-            ReviewList review1 = new ReviewList("ToBi","My favorite drink is coffe and this place is very good for mixed coffee",5);
-            ReviewList review2 = new ReviewList("Hoàng","The same message in above",5);
-
-            arrContact.add(review1);
-            arrContact.add(review2);
-
 //            set content custom adapter
-            CustomAdapterReview customAdaper = new CustomAdapterReview(this,R.layout.detail_location,arrContact);
+            customAdaper = new CustomAdapterReview(this,R.layout.detail_location,arrContact);
             lvReviewList.setAdapter(customAdaper);
 
 //            declacre btn txt and catch event click

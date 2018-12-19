@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.duong.myapplication.LocationList;
 import com.example.duong.myapplication.R;
+import com.example.duong.myapplication.ReviewList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -197,6 +198,22 @@ public class QueryUtils {
             }
 
             location.setOpeningTime(openningTime);
+
+            ArrayList<ReviewList> reviewLists = new ArrayList<ReviewList>();
+
+            JSONArray reviewArr = locationObject.getJSONArray("reviews");
+            for(int i = 0; i < reviewArr.length(); i++){
+                JSONObject reviewObj = reviewArr.getJSONObject(i);
+                String author = reviewObj.getString("author");
+                String reviewId = reviewObj.getString("_id");
+                String reviewText = reviewObj.getString("reviewText");
+                int reviewRating = reviewObj.getInt("rating");
+
+                ReviewList review = new ReviewList(reviewId, author, reviewText, reviewRating);
+                reviewLists.add(review);
+            }
+
+            location.setReviews(reviewLists);
         return location;
     }
 

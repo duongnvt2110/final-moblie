@@ -1,17 +1,19 @@
 package com.example.duong.myapplication;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
 public class ReviewList {
+    private String id;
     private String name;
     private String message;
     private float rating;
 
+    public ReviewList(String id, String name, String message, float rating) {
+        this.id = id;
+        this.name = name;
+        this.message = message;
+        this.rating = rating;
+    }
 
-    public ReviewList(String name,String message, int rating) {
+    public ReviewList(String name, String message, int rating) {
         this.name = name;
         this.message = message;
         this.rating = rating;

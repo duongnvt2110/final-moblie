@@ -1,6 +1,9 @@
 package com.example.duong.myapplication;
 
+import java.util.ArrayList;
+
 public class LocationList {
+
 
      private String id;
      private int image;
@@ -9,6 +12,27 @@ public class LocationList {
      private float rating;
      private int distance;
      private String openingTime;
+     private ArrayList<ReviewList> reviews;
+
+    public ArrayList<ReviewList> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(ArrayList<ReviewList> reviews) {
+        this.reviews = reviews;
+    }
+
+    public LocationList(String id, int image, String name, String address, float rating, int distance, String openingTime, ArrayList<ReviewList> reviews) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.address = address;
+        this.rating = rating;
+        this.distance = distance;
+
+        this.openingTime = openingTime;
+        this.reviews = reviews;
+    }
 
     public String getOpeningTime() {
         return openingTime;
