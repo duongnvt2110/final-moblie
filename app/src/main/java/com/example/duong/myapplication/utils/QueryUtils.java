@@ -144,12 +144,6 @@ public class QueryUtils {
     private static ArrayList<LocationList> getLocationDataFromJson(String locationJsonStr)
             throws JSONException {
 
-        final String OWM_LIST = "list";
-        final String OWM_WEATHER = "weather";
-        final String OWM_TEMPERATURE = "temp";
-        final String OWM_MAX = "max";
-        final String OWM_MIN = "min";
-        final String OWM_DESCRIPTION = "main";
 
         final String OWM_ITEMS = "items";
         final String OWM_DATA = "data";
@@ -184,26 +178,25 @@ public class QueryUtils {
     private static LocationList getDetailLocation(String locationJsonStr)
             throws JSONException {
 
-        final String OWM_LIST = "list";
-        final String OWM_WEATHER = "weather";
-        final String OWM_TEMPERATURE = "temp";
-        final String OWM_MAX = "max";
-        final String OWM_MIN = "min";
-        final String OWM_DESCRIPTION = "main";
-
-        final String OWM_ITEMS = "items";
-        final String OWM_DATA = "data";
-        final String OWN_STATUS = "status";
-        final String OWN_TOTAL = "total";
 
         JSONObject locationObject = new JSONObject(locationJsonStr);
             String id = locationObject.getString("_id");
             String name = locationObject.getString("name");
             Integer rating = locationObject.getInt("rating");
             String address = locationObject.getString("address");
-
             LocationList location = new LocationList(id, R.drawable.coffee, name, address, rating, 100);
+            JSONArray openingTimes = locationObject.getJSONArray("openingTimes");
 
+            String openningTime = "";
+            for(int i = 0; i < openingTimes.length(); i++){
+                JSONObject openingTimeObject = openingTimes.getJSONObject(i);
+                String days = openingTimeObject.getString("days");
+                String closing = openingTimeObject.getString("closing");
+                String ot = "           " + days + ":  " + "7:00-" + closing;
+                openningTime = openningTime + ot + "\n";
+            }
+
+            location.setOpeningTime(openningTime);
         return location;
     }
 

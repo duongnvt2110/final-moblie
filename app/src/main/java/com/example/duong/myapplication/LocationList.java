@@ -1,7 +1,34 @@
 package com.example.duong.myapplication;
 
 public class LocationList {
-        private String id;
+
+     private String id;
+     private int image;
+     private String name;
+     private String address;
+     private float rating;
+     private int distance;
+     private String openingTime;
+
+    public String getOpeningTime() {
+        return openingTime;
+    }
+
+    public void setOpeningTime(String openingTime) {
+        this.openingTime = openingTime;
+    }
+
+    public LocationList(String id, int image, String name, String address, float rating, int distance, String openingTime) {
+
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.address = address;
+        this.rating = rating;
+        this.distance = distance;
+        this.openingTime = openingTime;
+    }
+
 
     public String getId() {
         return id;
@@ -27,13 +54,6 @@ public class LocationList {
         this.rating = rating;
         this.distance = distance;
     }
-
-    private int image;
-        private String name;
-        private String address;
-        private float rating;
-        private int distance;
-
 
     public LocationList(int image,String name, String address, int rating, int distance) {
             this.image = image;

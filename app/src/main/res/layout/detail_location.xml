@@ -39,6 +39,7 @@
             android:orientation="vertical">
 
             <RatingBar
+                android:id="@+id/rb_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -51,6 +52,7 @@
                 android:transformPivotY="16dp" />
 
             <TextView
+                android:id="@+id/txt_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -75,14 +77,8 @@
                 android:layout_marginBottom="10dip"
                 android:background="@drawable/shape"
                 android:fontFamily="@font/lobster"
-                android:lines="7"
-                android:text="           Monday - Open 24 hours\n
-            Tuesday	- Open 24 hours \n
-            Wednesday - Open 24 hours \n
-            Thursday - Open 24 hours \n
-            Friday - Open 24 hours \n
-            Saturday - Open 24 hours \n
-            Sunday	- Open 24 hours"
+                android:lines="3"
+                android:text=""
                 android:textSize="20dp" />
         </LinearLayout>
 
