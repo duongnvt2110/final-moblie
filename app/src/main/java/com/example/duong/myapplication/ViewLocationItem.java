@@ -17,6 +17,7 @@ import com.example.duong.myapplication.utils.QueryUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ViewLocationItem  extends AppCompatActivity {
     CustomAdapter customAdaper = null;
 
