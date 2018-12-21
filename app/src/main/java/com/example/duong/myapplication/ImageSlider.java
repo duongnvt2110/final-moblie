@@ -5,9 +5,14 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 public class ImageSlider extends PagerAdapter {
 
     private String[] urls;
@@ -20,10 +25,18 @@ public class ImageSlider extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         final Context context = container.getContext();
-        final AppCompatImageView imageView = new AppCompatImageView(context);
+        final ImageView imageView = new ImageView(context);
         container.addView(imageView);
         // Load ảnh vào ImageView bằng Glide
-        Glide.with(context).load(urls[position]).into(imageView);
+        RequestOptions options = new RequestOptions();
+        options.centerCrop();
+//
+        Glide.with(context).asBitmap().load(urls[position])
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
+                        .override(820, 280)
+                        .centerCrop()
+                )
+                .into(imageView);
         // Return
         return imageView;
     }

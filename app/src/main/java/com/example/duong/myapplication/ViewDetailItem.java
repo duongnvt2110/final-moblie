@@ -117,7 +117,7 @@ public class ViewDetailItem  extends AppCompatActivity {
 //            Declare ViewPager
             viewPager = (ViewPager) findViewById(R.id.view_pager);
 //            Link Url
-            String[] url ={"https://www.upsieutoc.com/images/2018/12/20/coffee_home.jpg","https://www.upsieutoc.com/images/2018/12/20/coffee_home.jpg"};
+            String[] url ={"https://www.upsieutoc.com/images/2018/12/20/14470593_1773937859546899_5624468539250504435_n.jpg","https://www.upsieutoc.com/images/2018/12/20/coffee_home.jpg"};
             myImageSlider = new ImageSlider(url);
             viewPager.setAdapter(myImageSlider);
 //            Set time loop
