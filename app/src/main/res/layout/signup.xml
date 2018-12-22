@@ -35,10 +35,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:fontFamily="@font/lobster"
-                android:text="Username" />
+                android:text="Email" />
 
             <EditText
-                android:id="@+id/su_username"
+                android:id="@+id/su_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -47,10 +47,29 @@
                 android:inputType="textPersonName"
                 android:background="@drawable/shape"
                 android:gravity="center"
-                android:text="Name" />
+                android:text="Email" />
 
             <TextView
                 android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster"
+                android:textSize="20dp"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/su_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:background="@drawable/shape"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:inputType="textPersonName"
+                android:text="Name" />
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lobster"
@@ -67,26 +86,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:inputType="textPersonName"
-                android:text="Name" />
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:textSize="20dp"
-                android:text="Confirm Password" />
-
-            <EditText
-                android:id="@+id/su_repassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:background="@drawable/shape"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Password" />
 
             <Button
                 android:id="@+id/btn_su"

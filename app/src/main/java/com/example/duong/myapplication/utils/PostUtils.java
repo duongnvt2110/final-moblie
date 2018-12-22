@@ -65,6 +65,55 @@ public class PostUtils {
 
     }
 
+    public static int register(String email, String name, String password)
+    {
+        JSONObject data = new JSONObject();
+        String token = null;
+
+        try {
+            data.put("email", email);
+            data.put("name", name);
+            data.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        String requestUrl = "http://206.189.80.94:8000/api/authentication/register";
+        Log.d("Url", requestUrl);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        URL url = QueryUtils.createURL(requestUrl);
+        String jsonReponse = null;
+
+        try {
+            jsonReponse = makePostHttpRequest(url, data);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error closing input stream", e);
+            return 0;
+        }
+
+        if(jsonReponse.equals("0")){
+            return 0;
+        }
+        Log.d("JSON: " , jsonReponse);
+
+        try {
+            JSONObject json = new JSONObject(jsonReponse);
+            token = json.getString("token");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return 1;
+
+    }
+
 
     public static void addReview(JSONObject data)
     {
