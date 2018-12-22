@@ -17,6 +17,54 @@ public class PostUtils {
     public final static String LOG_TAG = PostUtils.class.getSimpleName();
 
 
+    public static int addReview(String locationId, int rating, String reviewText)
+    {
+        JSONObject data = new JSONObject();
+        String token = null;
+
+        try {
+            data.put("rating", rating);
+            data.put("reviewText", reviewText);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        String requestUrl = "http://206.189.80.94:8000/api/'/locations/" + locationId + "/reviews'";
+        Log.d("Url", requestUrl);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        URL url = QueryUtils.createURL(requestUrl);
+        String jsonReponse = null;
+
+        try {
+            jsonReponse = makePostHttpRequest(url, data);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error closing input stream", e);
+            return 0;
+        }
+
+        if(jsonReponse.equals("0")){
+            return 0;
+        }
+        Log.d("JSON: " , jsonReponse);
+
+        try {
+            JSONObject json = new JSONObject(jsonReponse);
+            token = json.getString("token");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return 1;
+
+    }
+
     public static int login(String username, String password)
     {
         JSONObject data = new JSONObject();
