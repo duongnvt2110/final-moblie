@@ -89,7 +89,7 @@ public class QueryUtils {
         }
         return url;
     }
-    private static String readFromStream(InputStream inputStream) throws IOException {
+    public static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output =  new StringBuilder();
         if (inputStream != null)
         {
@@ -148,8 +148,6 @@ public class QueryUtils {
 
         final String OWM_ITEMS = "items";
         final String OWM_DATA = "data";
-        final String OWN_STATUS = "status";
-        final String OWN_TOTAL = "total";
 
         JSONObject locationJson = new JSONObject(locationJsonStr);
         JSONObject locationData = locationJson.getJSONObject(OWM_DATA);

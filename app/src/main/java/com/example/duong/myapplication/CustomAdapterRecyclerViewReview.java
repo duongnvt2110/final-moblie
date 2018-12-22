@@ -1,17 +1,15 @@
 package com.example.duong.myapplication;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Button;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 
 
 //Link https://gist.github.com/chRyNaN/fd433c680b85b2ef267448b75ecac0ae
@@ -70,7 +68,7 @@ public class CustomAdapterRecyclerViewReview extends
         if(this.item == null){
             this.item = new ArrayList<>();
         }
-        items.addAll(items);
+        reviews.addAll(items);
         notifyDataSetChanged();
     }
 }
