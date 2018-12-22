@@ -26,6 +26,7 @@ import android.provider.Settings;
 import android.os.Build;
 import com.example.duong.myapplication.LocationList;
 import com.example.duong.myapplication.ReviewList;
+import com.example.duong.myapplication.Token;
 
 
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity  {
     protected LocationListener locationListener;
     protected int MY_PERMISSION_ACCESS_COARSE_LOCATION = 1;
     protected Context context;
+    protected Token token;
     TextView txtLat;
     String lat;
     String provider;
@@ -80,12 +82,14 @@ public class MainActivity extends AppCompatActivity  {
         final TextView txt = (TextView) findViewById(R.id.text);
         @Override
         public void onLocationChanged(Location loc) {
-            txt.setText("Location changed: Lat: " + loc.getLatitude() + " Lng: "
-                    + loc.getLongitude());
+//            txt.setText("Location changed: Lat: " + loc.getLatitude() + " Lng: "
+//                    + loc.getLongitude());
+            Token token = new Token();
+//            token.saveToken("Location changed:");
+            String tokenTest = token.getToken();
             Toast.makeText(
                     getBaseContext(),
-                    "Location changed: Lat: " + loc.getLatitude() + " Lng: "
-                            + loc.getLongitude(), Toast.LENGTH_SHORT).show();
+                    tokenTest, Toast.LENGTH_SHORT).show();
             String longitude = "Longitude: " + loc.getLongitude();
         }
 
