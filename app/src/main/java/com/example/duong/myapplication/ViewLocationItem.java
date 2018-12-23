@@ -86,8 +86,6 @@ public class ViewLocationItem  extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-
                 LocationList itemChosen = (LocationList) parent.getItemAtPosition(position);
 
                 Intent Intent = new Intent(ViewLocationItem.this, ViewDetailItem.class);
@@ -154,6 +152,13 @@ public class ViewLocationItem  extends AppCompatActivity {
                 locationManager.requestLocationUpdates(
                         LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
 
+                if(longitude != null && latitude != null){
+                    updateLocationByDistance(longitude, latitude);
+                }
+                else{
+                    Toast.makeText(getBaseContext(), "Không thể lấy tọa độ"  ,Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
@@ -169,7 +174,7 @@ public class ViewLocationItem  extends AppCompatActivity {
         @Override
         public void onLocationChanged(Location loc) {
             latitude = loc.getLatitude();
-            longitude =loc.getLongitude();
+            longitude = loc.getLongitude();
             Token token = new Token();
             Toast.makeText(
                     getBaseContext(),
@@ -251,11 +256,12 @@ public class ViewLocationItem  extends AppCompatActivity {
         }
     }
 
-    private void updateLocationByDistance()
+    private void updateLocationByDistance(Double longitude, Double latitude)
     {
-
+        String log = Double.toString(longitude);
+        String lat = Double.toString(latitude);
         FecthLocationByDistanceTask task = new FecthLocationByDistanceTask();
-        task.execute();
+        task.execute(log, lat);
     }
 
     public class FecthLocationByDistanceTask extends AsyncTask<String, Void, List<LocationList>>
