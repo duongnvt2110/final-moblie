@@ -64,7 +64,7 @@ public class Signup extends AppCompatActivity {
             {
                 TokenTask tokenTask = new TokenTask();
                 tokenTask.execute(token);
-                startActivity(new Intent(Signup.this, MainActivity.class));
+                startActivity(new Intent(Signup.this, ViewLocationItem.class));
 
             }
 

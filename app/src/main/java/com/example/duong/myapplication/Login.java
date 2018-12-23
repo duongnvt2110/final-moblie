@@ -65,7 +65,7 @@ public class Login extends AppCompatActivity {
             {
                 TokenTask tokenTask = new TokenTask();
                 tokenTask.execute(token);
-                startActivity(new Intent(Login.this, MainActivity.class));
+                startActivity(new Intent(Login.this, ViewLocationItem.class));
 
             }
 

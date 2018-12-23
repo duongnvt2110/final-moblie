@@ -14,7 +14,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String simpleFileName = "token.txt";
         if(fileExist(simpleFileName)){
-            startActivity(new Intent(Home.this, MainActivity.class));
+            startActivity(new Intent(Home.this, ViewLocationItem.class));
         }else{
             setContentView(R.layout.home);
             final Button btnLogin = (Button) findViewById(R.id.btn_login);

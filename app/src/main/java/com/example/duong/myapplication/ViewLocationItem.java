@@ -70,28 +70,6 @@ public class ViewLocationItem  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_list);
 
-
-//        Add if to check permission.
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED) {
-        } else {
-            ActivityCompat.requestPermissions(this, new String[] {
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION },
-                    MY_PERMISSION_ACCESS_COARSE_LOCATION);
-        }
-
-        //    Define location
-        LocationManager locationManager = (LocationManager)
-                getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locationListener = new MyLocationListener();
-        locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
-
-
-
         final ListView locationList = (ListView) findViewById(R.id.lv_location);
         final ImageView imgLocation = (ImageView) findViewById(R.id.image);
         ArrayList<LocationList> arrContact = new ArrayList<>();
@@ -155,7 +133,27 @@ public class ViewLocationItem  extends AppCompatActivity {
         final Button btn_near = (Button) findViewById(R.id.btn_near);
         btn_near.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(ViewLocationItem.this, "Button near", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewLocationItem.this, "Location changed: Lat: " + latitude + " Lng: "
+                        + longitude, Toast.LENGTH_SHORT).show();
+                //        Add if to check permission.
+                if (ContextCompat.checkSelfPermission(ViewLocationItem.this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(ViewLocationItem.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                                PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    ActivityCompat.requestPermissions(ViewLocationItem.this, new String[] {
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION },
+                            MY_PERMISSION_ACCESS_COARSE_LOCATION);
+                }
+
+                //    Define location
+                LocationManager locationManager = (LocationManager)
+                        getSystemService(Context.LOCATION_SERVICE);
+                LocationListener locationListener = new MyLocationListener();
+                locationManager.requestLocationUpdates(
+                        LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+
             }
         });
     }
