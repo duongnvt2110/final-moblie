@@ -1,9 +1,17 @@
 package com.example.duong.myapplication;
 
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +37,9 @@ public class ViewLocationItem  extends AppCompatActivity {
     private int page = 1;
     private boolean flag_loading = false;
     private boolean end = false;
+    protected int MY_PERMISSION_ACCESS_COARSE_LOCATION = 1;
+    protected Context context;
+    protected Double latitude,longitude;
 
     @Override
     protected void onStart() {
@@ -58,6 +69,28 @@ public class ViewLocationItem  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_list);
+
+
+//        Add if to check permission.
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION },
+                    MY_PERMISSION_ACCESS_COARSE_LOCATION);
+        }
+
+        //    Define location
+        LocationManager locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new MyLocationListener();
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+
+
 
         final ListView locationList = (ListView) findViewById(R.id.lv_location);
         final ImageView imgLocation = (ImageView) findViewById(R.id.image);
@@ -131,6 +164,31 @@ public class ViewLocationItem  extends AppCompatActivity {
         FecthLocationTask task = new FecthLocationTask();
         task.execute();
     }
+
+    //    Class to show lat and lng
+    private class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location loc) {
+            latitude = loc.getLatitude();
+            longitude =loc.getLongitude();
+            Token token = new Token();
+            Toast.makeText(
+                    getBaseContext(),
+                    "Location changed: Lat: " + loc.getLatitude() + " Lng: "
+                            + loc.getLongitude(), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {}
+
+        @Override
+        public void onProviderEnabled(String provider) {}
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
+    }
+
 
 
     private void loadMore(){

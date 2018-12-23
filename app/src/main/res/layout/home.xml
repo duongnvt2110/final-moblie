@@ -50,7 +50,7 @@
                 android:padding="30dp"
                 android:textSize="25dp"
                 android:textColor="@color/colorWhite"
-                android:text=" If this is coffee, please bring me some tea.But if this is tea, please bring me some coffee."
+                android:text=" “Tìm, đánh giá và chia sẻ” quán café bạn yêu thích."
                 />
         </LinearLayout>
 
