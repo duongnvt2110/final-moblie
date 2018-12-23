@@ -23,7 +23,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_weight="1">
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btn_new"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
@@ -36,7 +36,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1">
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btn_near"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
