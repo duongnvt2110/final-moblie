@@ -125,12 +125,14 @@ public class ViewLocationItem  extends AppCompatActivity {
         final Button btn_new = (Button) findViewById(R.id.btn_new);
         btn_new.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                type = 1;
                 updateLocation();
             }
         });
         final Button btn_near = (Button) findViewById(R.id.btn_near);
         btn_near.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                type = 2;
                 Toast.makeText(ViewLocationItem.this, "Location changed: Lat: " + latitude + " Lng: "
                         + longitude, Toast.LENGTH_SHORT).show();
                 //        Add if to check permission.

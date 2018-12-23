@@ -1,4 +1,5 @@
 package com.example.duong.myapplication;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.duong.myapplication.R;
-import com.example.duong.myapplication.LocationList;
 
 public class CustomAdapter extends ArrayAdapter<LocationList> {
 
@@ -45,7 +47,11 @@ public class CustomAdapter extends ArrayAdapter<LocationList> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.image.setImageResource(locationList.getImage());
+        Glide.with(context).asBitmap().load(locationList.getImage())
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
+
+                )
+                .into(viewHolder.image);
         viewHolder.name.setText(locationList.getName());
         viewHolder.address.setText(locationList.getAddress());
         viewHolder.rating.setTag(position);

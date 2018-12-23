@@ -2,17 +2,13 @@ package com.example.duong.myapplication;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 public class ImageSlider extends PagerAdapter {
 
     private String[] urls;
@@ -28,13 +24,9 @@ public class ImageSlider extends PagerAdapter {
         final ImageView imageView = new ImageView(context);
         container.addView(imageView);
         // Load ảnh vào ImageView bằng Glide
-        RequestOptions options = new RequestOptions();
-        options.centerCrop();
-//
         Glide.with(context).asBitmap().load(urls[position])
                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
-                        .override(820, 280)
-                        .centerCrop()
+
                 )
                 .into(imageView);
         // Return
