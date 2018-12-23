@@ -23,6 +23,36 @@ import java.util.ArrayList;
 public class QueryUtils {
     public final static String LOG_TAG = QueryUtils.class.getSimpleName();
 
+
+    public static ArrayList<LocationList> fetchLocationByDistanceData(String log, String lat)
+    {
+
+        ArrayList<LocationList> locations = null;
+        String requestUrl = "http://206.189.80.94:8000/api/locations/api/locations?lng=106.714081&maxDistance=5&lat=10.801440";
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        URL url = createURL(requestUrl);
+        String jsonReponse = null;
+        try {
+            jsonReponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error closing input stream", e);
+        }
+        Log.d("JSON: " , jsonReponse);
+
+        try {
+            locations = getLocationDataFromJson(jsonReponse);
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error getting data from JSON");
+        }
+        Log.d("Data",locations.toString());
+        return locations;
+    }
+
+
     public static ArrayList<LocationList> fetchLocationData()
     {
         ArrayList<LocationList> locations = null;
