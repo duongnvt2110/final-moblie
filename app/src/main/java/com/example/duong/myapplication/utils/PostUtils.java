@@ -15,6 +15,7 @@ import java.net.URL;
 
 public class PostUtils {
     public final static String LOG_TAG = PostUtils.class.getSimpleName();
+    protected String simpleFileName = "token.txt";
 
 
     public static int addReview(String locationId, int rating, String reviewText)
@@ -65,7 +66,7 @@ public class PostUtils {
 
     }
 
-    public static int login(String username, String password)
+    public static String login(String username, String password)
     {
         JSONObject data = new JSONObject();
         String token = null;
@@ -93,11 +94,11 @@ public class PostUtils {
             jsonReponse = makePostHttpRequest(url, data);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
-            return 0;
+            return "0";
         }
 
         if(jsonReponse.equals("0")){
-            return 0;
+            return "0";
         }
         Log.d("JSON: " , jsonReponse);
 
@@ -109,11 +110,11 @@ public class PostUtils {
             e.printStackTrace();
         }
 
-        return 1;
+        return token;
 
     }
 
-    public static int register(String email, String name, String password)
+    public static String register(String email, String name, String password)
     {
         JSONObject data = new JSONObject();
         String token = null;
@@ -142,11 +143,11 @@ public class PostUtils {
             jsonReponse = makePostHttpRequest(url, data);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
-            return 0;
+            return "0";
         }
 
         if(jsonReponse.equals("0")){
-            return 0;
+            return "0";
         }
         Log.d("JSON: " , jsonReponse);
 
@@ -158,7 +159,7 @@ public class PostUtils {
             e.printStackTrace();
         }
 
-        return 1;
+        return token;
 
     }
 

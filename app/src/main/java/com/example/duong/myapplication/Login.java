@@ -1,5 +1,6 @@
 package com.example.duong.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.duong.myapplication.utils.PostUtils;
+
+import java.io.FileOutputStream;
 
 public class Login extends AppCompatActivity {
 
@@ -40,24 +43,28 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public class LoginTask extends AsyncTask<String, Void, Integer>
+
+
+    public class LoginTask extends AsyncTask<String, Void, String>
     {
 
 
         @Override
-        protected Integer doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             return PostUtils.login(params[0], params[1]);
         }
 
         @Override
-        protected void onPostExecute(Integer status) {
-            if(status != 1)
+        protected void onPostExecute(String token) {
+            if(token.equals("0"))
             {
                 Toast.makeText(Login.this, "Wrong data", Toast.LENGTH_LONG).show();
                 return;
             }
             else
             {
+                TokenTask tokenTask = new TokenTask();
+                tokenTask.execute(token);
                 startActivity(new Intent(Login.this, MainActivity.class));
 
             }
@@ -65,5 +72,41 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    public class TokenTask extends AsyncTask<String, Void, Integer>
+    {
 
-}
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            return saveToken(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer status) {
+
+
+        }
+    }
+
+    protected String simpleFileName = "token.txt";
+
+    public int saveToken(String token) {
+        String data = token;
+        try {
+            // Mở một luồng ghi file.
+            FileOutputStream out = this.openFileOutput(simpleFileName, Context.MODE_PRIVATE);
+            // Ghi dữ liệu.
+            out.write(data.getBytes());
+            out.close();
+            return 1;
+//            Toast.makeText(getBaseContext(),"File saved!",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+//            Toast.makeText(this,"Error:"+ e.getMessage(),Toast.LENGTH_SHORT).show();
+            return 0;
+        }
+    }
+
+
+
+    }
