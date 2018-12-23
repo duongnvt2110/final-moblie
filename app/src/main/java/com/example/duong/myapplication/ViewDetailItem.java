@@ -4,36 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import  android.support.design.widget.NavigationView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.AppCompatImageView;
+
 import com.example.duong.myapplication.utils.QueryUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import com.bumptech.glide.Glide;
-import com.example.duong.myapplication.ReviewList;
 
 public class ViewDetailItem  extends AppCompatActivity {
     CustomAdapterRecyclerViewReview customAdaper;
@@ -46,12 +38,14 @@ public class ViewDetailItem  extends AppCompatActivity {
     private int[] layouts;
     private Button btnSkip, btnNext;
     private Context context;
+    private String locationId;
 
     @Override
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
         final String id = intent.getStringExtra("id");
+        locationId = id;
         this.getDetailLocation(id);
     }
 
@@ -76,26 +70,11 @@ public class ViewDetailItem  extends AppCompatActivity {
             RecyclerView rvContacts = (RecyclerView) findViewById(R.id.dt_location);
             // Create adapter passing in the sample user data
             List<ReviewList> data = new ArrayList<>();
-//            Demo Data
-//            ReviewList review1 = new ReviewList("ToBi","My favorite drink is coffe and this place is very good for mixed coffee",5);
-//            ReviewList review2 = new ReviewList("Hoàng","The same message in above",5);
-//            ReviewList review3 = new ReviewList("Hoàng","The same message in above",5);
-//            data.add(review1);
-//            data.add(review2);
-//            data.add(review3);
             customAdaper = new CustomAdapterRecyclerViewReview(data);
             // Attach the adapter to the recyclerview to populate items
             rvContacts.setAdapter(customAdaper);
 //            // Set layout manager to position the items
             rvContacts.setLayoutManager(new LinearLayoutManager(this));
-
-////            create Listview and add into ReviewList
-//            ListView lvReviewList= (ListView) findViewById(R.id.dt_location);
-//            ArrayList<ReviewList> arrContact = new ArrayList<>();
-//
-////            set content custom adapter
-//            customAdaper = new CustomAdapterReview(this,R.layout.detail_location,arrContact);
-//            lvReviewList.setAdapter(customAdaper);
 
 //            declacre btn txt and catch event click
             final TextView tvView= (TextView) findViewById(R.id.btn_addreview);
@@ -104,6 +83,7 @@ public class ViewDetailItem  extends AppCompatActivity {
                 public void onClick(View v) {
 
                     Intent Intent = new Intent(ViewDetailItem.this, AddReview.class);
+                    Intent.putExtra("locationId",locationId);
                     startActivity(Intent);
                 }
             });
