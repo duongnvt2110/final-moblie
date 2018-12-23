@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity  {
 //            txt.setText("Location changed: Lat: " + loc.getLatitude() + " Lng: "
 //                    + loc.getLongitude());
             Token token = new Token();
-//            token.saveToken("Location changed:");
+            token.saveToken("Location changed:");
             String tokenTest = token.getToken();
             Toast.makeText(
                     getBaseContext(),

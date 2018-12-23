@@ -8,33 +8,40 @@ import android.widget.Toast;
 import android.os.Bundle;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Token extends AppCompatActivity{
 
     protected String simpleFileName = "token.txt";
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            saveToken("test");
-            String token = getToken();
-            Toast.makeText(getBaseContext(),token,Toast.LENGTH_SHORT).show();
-
-        }
+//        @Override
+//        protected void onCreate(Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//            setContentView(R.layout.activity_main);
+//            saveToken("123");
+//            String token = getToken();
+//            Toast.makeText(getBaseContext(),token,Toast.LENGTH_SHORT).show();
+//
+//        }
 
     public void saveToken(String token) {
         String data = token;
         try {
             // Mở một luồng ghi file.
-            FileOutputStream out = this.openFileOutput(simpleFileName,Context.MODE_PRIVATE);
-            // Ghi dữ liệu.
-            out.write(data.getBytes());
-            out.close();
+            FileOutputStream out= openFileOutput(simpleFileName,0);
+            OutputStreamWriter writer= new OutputStreamWriter(out);
+            writer.write(data);
+            writer.close();
+//            FileOutputStream out = this.openFileOutput(simpleFileName,Context.MODE_PRIVATE);
+//            // Ghi dữ liệu.
+//            out.write(data.getBytes());
+//            out.close();
 //            Toast.makeText(getBaseContext(),"File saved!",Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
                 e.printStackTrace();
@@ -44,22 +51,35 @@ public class Token extends AppCompatActivity{
 
     public String getToken() {
 
-        final StringBuilder sb= new StringBuilder();
+        StringBuilder builder=new StringBuilder();
 
         try {
-            // Mở một luồng đọc file.
-            FileInputStream in = this.openFileInput(simpleFileName);
 
-            BufferedReader br= new BufferedReader(new InputStreamReader(in));
+            FileInputStream in= openFileInput(simpleFileName);
+            BufferedReader reader=new
+                    BufferedReader(new InputStreamReader(in));
+            String data="";
 
-            String s= null;
-            while((s= br.readLine())!= null)  {
-                sb.append(s).append("\n");
+            while((data=reader.readLine())!=null)
+            {
+                builder.append(data);
+                builder.append("\n");
             }
+            in.close();
+
+//            // Mở một luồng đọc file.
+//            FileInputStream in = this.openFileInput(simpleFileName);
+//
+//            BufferedReader br= new BufferedReader(new InputStreamReader(in));
+//
+//            String s= null;
+//            while((s= br.readLine())!= null)  {
+//                sb.append(s).append("\n");
+//            }
         } catch (Exception e) {
                 e.printStackTrace();
 //            Toast.makeText(this,"Error:"+ e.getMessage(),Toast.LENGTH_SHORT).show();
         }
-        return sb.toString();
+        return builder.toString();
     }
 }
