@@ -82,14 +82,15 @@ public class MainActivity extends AppCompatActivity  {
         final TextView txt = (TextView) findViewById(R.id.text);
         @Override
         public void onLocationChanged(Location loc) {
-//            txt.setText("Location changed: Lat: " + loc.getLatitude() + " Lng: "
-//                    + loc.getLongitude());
+            txt.setText("Location changed: Lat: " + loc.getLatitude() + " Lng: "
+                    + loc.getLongitude());
             Token token = new Token();
-            token.saveToken("Location changed:");
-            String tokenTest = token.getToken();
+//            token.saveToken("Location changed:");
+//            String tokenTest = token.getToken();
             Toast.makeText(
                     getBaseContext(),
-                    tokenTest, Toast.LENGTH_SHORT).show();
+                    "Location changed: Lat: " + loc.getLatitude() + " Lng: "
+                            + loc.getLongitude(), Toast.LENGTH_SHORT).show();
             String longitude = "Longitude: " + loc.getLongitude();
         }
 

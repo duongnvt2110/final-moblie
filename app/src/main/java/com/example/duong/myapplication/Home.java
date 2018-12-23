@@ -11,13 +11,11 @@ public class Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
+        super.onCreate(savedInstanceState);
         String simpleFileName = "token.txt";
         if(fileExist(simpleFileName)){
             startActivity(new Intent(Home.this, MainActivity.class));
         }else{
-            super.onCreate(savedInstanceState);
             setContentView(R.layout.home);
             final Button btnLogin = (Button) findViewById(R.id.btn_login);
             final Button btnSignup = (Button) findViewById(R.id.btn_signup);
