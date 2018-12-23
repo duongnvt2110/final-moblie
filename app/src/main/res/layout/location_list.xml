@@ -10,24 +10,40 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_weight="2"
-        android:descendantFocusability="blocksDescendants"
         android:layout_height="match_parent">
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="133dp"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_weight="1"-->
-            <!--tools:layout_editor_absoluteX="8dp"-->
-            <!--tools:layout_editor_absoluteY="55dp">-->
-            <!--<TextView-->
-                <!--android:id="@+id/textView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:lines="2"-->
-                <!--android:background="@color/colorHead"-->
-                <!--android:text="LocalCafe Find places to work with wifi near you"-->
-                <!--android:textSize="30dp"></TextView>-->
-        <!--</LinearLayout>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:layout_gravity="center"
+                    android:text="Mới Đây" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorWhite"
+                    android:text="Gần Đây" />
+            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="307dp"
