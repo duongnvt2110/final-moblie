@@ -73,25 +73,50 @@ public class MainActivity extends AppCompatActivity  {
         LocationListener locationListener = new MyLocationListener();
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
-
-
+        double[] text= showCurrentLocation();
+        final TextView txt = (TextView) findViewById(R.id.text);
+        txt.setText("Location changed: Lat: " + text[0] + " Lng: "
+                + text[1]);
     }
-//    Class to show lat and lng
+
+    protected double[] showCurrentLocation() {
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION },
+                    MY_PERMISSION_ACCESS_COARSE_LOCATION);
+        }
+
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            double[] geo = {
+                    location.getLongitude(),
+                    location.getLatitude()
+            };
+        return geo;
+    }
+
+    //    Class to show lat and lng
     private class MyLocationListener implements LocationListener {
 
         final TextView txt = (TextView) findViewById(R.id.text);
         @Override
         public void onLocationChanged(Location loc) {
-            txt.setText("Location changed: Lat: " + loc.getLatitude() + " Lng: "
-                    + loc.getLongitude());
-            Token token = new Token();
+//            txt.setText("Location changed: Lat: " + loc.getLatitude() + " Lng: "
+//                    + loc.getLongitude());
+//            Token token = new Token();
 //            token.saveToken("Location changed:");
 //            String tokenTest = token.getToken();
-            Toast.makeText(
-                    getBaseContext(),
-                    "Location changed: Lat: " + loc.getLatitude() + " Lng: "
-                            + loc.getLongitude(), Toast.LENGTH_SHORT).show();
-            String longitude = "Longitude: " + loc.getLongitude();
+//            Toast.makeText(
+//                    getBaseContext(),
+//                    "Location changed: Lat: " + loc.getLatitude() + " Lng: "
+//                            + loc.getLongitude(), Toast.LENGTH_SHORT).show();
+//            String longitude = "Longitude: " + loc.getLongitude();
         }
 
         @Override
