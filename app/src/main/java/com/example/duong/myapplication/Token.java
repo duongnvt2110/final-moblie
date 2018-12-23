@@ -20,15 +20,29 @@ public class Token extends AppCompatActivity{
 
     protected String simpleFileName = "token.txt";
 
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.activity_main);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            deleteToken(simpleFileName);
 //            saveToken("123");
 //            String token = getToken();
 //            Toast.makeText(getBaseContext(),token,Toast.LENGTH_SHORT).show();
-//
-//        }
+
+        }
+
+    public void deleteToken(String fileName){
+
+        try{
+            File dir = getFilesDir();
+            File file = new File(dir, fileName);
+            boolean deleted = file.delete();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     public void saveToken(String token) {
         String data = token;
