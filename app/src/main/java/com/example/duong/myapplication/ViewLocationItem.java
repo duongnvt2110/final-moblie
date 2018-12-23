@@ -1,11 +1,12 @@
 package com.example.duong.myapplication;
 
 
-import android.support.v7.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -25,6 +26,22 @@ public class ViewLocationItem  extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         this.updateLocation();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_logout)
+        {
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
