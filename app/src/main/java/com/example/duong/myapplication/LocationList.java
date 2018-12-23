@@ -6,13 +6,22 @@ public class LocationList {
 
 
      private String id;
-     private int image;
+     private String image;
      private String name;
      private String address;
      private float rating;
      private int distance;
      private String openingTime;
+     private String[] images;
      private ArrayList<ReviewList> reviews;
+
+    public String[] getImages() {
+        return images;
+    }
+
+    public void setImages(String[] images) {
+        this.images = images;
+    }
 
     public ArrayList<ReviewList> getReviews() {
         return reviews;
@@ -22,14 +31,13 @@ public class LocationList {
         this.reviews = reviews;
     }
 
-    public LocationList(String id, int image, String name, String address, float rating, int distance, String openingTime, ArrayList<ReviewList> reviews) {
+    public LocationList(String id, String image, String name, String address, float rating, int distance, String openingTime, ArrayList<ReviewList> reviews) {
         this.id = id;
         this.image = image;
         this.name = name;
         this.address = address;
         this.rating = rating;
         this.distance = distance;
-
         this.openingTime = openingTime;
         this.reviews = reviews;
     }
@@ -42,7 +50,7 @@ public class LocationList {
         this.openingTime = openingTime;
     }
 
-    public LocationList(String id, int image, String name, String address, float rating, int distance, String openingTime) {
+    public LocationList(String id, String image, String name, String address, float rating, int distance, String openingTime) {
 
         this.id = id;
         this.image = image;
@@ -69,7 +77,7 @@ public class LocationList {
         this.rating = rating;
     }
 
-    public LocationList(String id, int image, String name, String address, float rating, int distance) {
+    public LocationList(String id, String image, String name, String address, float rating, int distance) {
 
         this.id = id;
         this.image = image;
@@ -79,7 +87,7 @@ public class LocationList {
         this.distance = distance;
     }
 
-    public LocationList(int image,String name, String address, int rating, int distance) {
+    public LocationList(String image,String name, String address, int rating, int distance) {
             this.image = image;
             this.name = name;
             this.address = address;
@@ -112,11 +120,11 @@ public class LocationList {
         }
 
 
-        public int getImage() {
+        public String getImage() {
             return image;
         }
 
-        public void setImage(int image) {
+        public void setImage(String image) {
             this.image = image;
         }
 

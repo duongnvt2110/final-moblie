@@ -3,7 +3,6 @@ package com.example.duong.myapplication.utils;
 import android.util.Log;
 
 import com.example.duong.myapplication.LocationList;
-import com.example.duong.myapplication.R;
 import com.example.duong.myapplication.ReviewList;
 
 import org.json.JSONArray;
@@ -218,9 +217,12 @@ public class QueryUtils {
             String name = locationObject.getString("name");
             Integer rating = locationObject.getInt("rating");
             String address = locationObject.getString("address");
+            String image = "https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/14907180_1793403247600360_1149741883844579018_n.jpg?resize=625%2C417&ssl=1";
 
-
-            LocationList location = new LocationList(id, R.drawable.coffee, name, address, rating, 100);
+            if((locationObject.has("image") && !locationObject.isNull("image"))){
+                image = locationObject.getString("image");
+            }
+              LocationList location = new LocationList(id, image, name, address, rating, 100);
 
 
             results.add(location);
@@ -240,8 +242,9 @@ public class QueryUtils {
             String name = locationObject.getString("name");
             Integer rating = locationObject.getInt("rating");
             String address = locationObject.getString("address");
-            LocationList location = new LocationList(id, R.drawable.coffee, name, address, rating, 100);
+            LocationList location = new LocationList(id,null, name, address, rating, 100);
             JSONArray openingTimes = locationObject.getJSONArray("openingTimes");
+
 
             String openningTime = "";
             for(int i = 0; i < openingTimes.length(); i++){
@@ -268,8 +271,24 @@ public class QueryUtils {
                 reviewLists.add(review);
             }
 
+            JSONArray imagesArr = locationObject.getJSONArray("images");
+
+            String[] images = new String[imagesArr.length()];
+
+
+            for(int i = 0; i < imagesArr.length(); i++){
+                String image = imagesArr.getString(i);
+
+                images[i] = image;
+            }
+
+
+            location.setImages(images);
+
+
             location.setReviews(reviewLists);
-        return location;
+
+            return location;
     }
 
 }

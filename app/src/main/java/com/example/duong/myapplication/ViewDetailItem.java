@@ -58,7 +58,18 @@ public class ViewDetailItem  extends AppCompatActivity {
         txtAddress.setText(location.getAddress());
         rbRating.setRating(location.getRating());
         txtHour.setText(location.getOpeningTime());
-
+        if(location.getImages().length > 0){
+            viewPager = (ViewPager) findViewById(R.id.view_pager);
+            myImageSlider = new ImageSlider(location.getImages());
+            viewPager.setAdapter(myImageSlider);
+        }
+        else{
+            viewPager = (ViewPager) findViewById(R.id.view_pager);
+//            Link Url
+            String[] url ={"https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/14907180_1793403247600360_1149741883844579018_n.jpg?resize=625%2C417&ssl=1","https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/11026026_1634385786835441_1646900694864188830_n.jpg?resize=625%2C625&ssl=1"};
+            myImageSlider = new ImageSlider(url);
+            viewPager.setAdapter(myImageSlider);
+        }
         ArrayList<ReviewList> reviews = location.getReviews();
         customAdaper.addAll(reviews);
     }
@@ -88,19 +99,6 @@ public class ViewDetailItem  extends AppCompatActivity {
                 }
             });
 
-//          Load Image online with Gilde Line 240 Class MyViewPageAdapter.
-//            Glide.with(getApplicationContext())
-//                .load("https://www.upsieutoc.com/images/2018/12/20/coffee_home.jpg")
-//                .into(imageSider1);
-
-//          Image Slider
-//            Declare ViewPager
-            viewPager = (ViewPager) findViewById(R.id.view_pager);
-//            Link Url
-            String[] url ={"https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/14907180_1793403247600360_1149741883844579018_n.jpg?resize=625%2C417&ssl=1","https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/11026026_1634385786835441_1646900694864188830_n.jpg?resize=625%2C625&ssl=1"};
-            myImageSlider = new ImageSlider(url);
-            viewPager.setAdapter(myImageSlider);
-//            Set time loop
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new MyTimeTask(),2000,4000);
     }
