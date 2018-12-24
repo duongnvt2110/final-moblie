@@ -54,7 +54,7 @@ public class QueryUtils {
     {
 
         ArrayList<LocationList> locations = null;
-        String requestUrl = "http://206.189.80.94:8000/api/locations/?lng=" + log + "&maxDistance=" + 500 +"&lat=" + lat;
+        String requestUrl = "http://206.189.80.94:8000/api/locations/?lng=" + log + "&maxDistance=" + 50000000 +"&lat=" + lat;
 
         try {
             Thread.sleep(1000);
@@ -70,10 +70,15 @@ public class QueryUtils {
         }
         Log.d("JSON: " , jsonReponse);
 
-        try {
-            locations = getLocationDataFromJson(jsonReponse);
-        } catch (JSONException e) {
-            Log.e(LOG_TAG, "Error getting data from JSON");
+        if(!jsonReponse.equals("[]")){
+            try {
+                locations = getLocationDataFromJson(jsonReponse);
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Error getting data from JSON");
+            }
+        }
+        else {
+            locations = new ArrayList<LocationList>();
         }
         return locations;
     }
@@ -211,28 +216,32 @@ public class QueryUtils {
 
 
         ArrayList<LocationList> results = new ArrayList<>();
-        for(int i = 0; i < locationArray.length(); i++) {
-            JSONObject locationObject = locationArray.getJSONObject(i);
-            String id = locationObject.getString("_id");
-            String name = locationObject.getString("name");
-            Integer rating = locationObject.getInt("rating");
-            String address = locationObject.getString("address");
-            String image = "https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/14907180_1793403247600360_1149741883844579018_n.jpg?resize=625%2C417&ssl=1";
-            Integer distance;
-            if((locationObject.has("image") && !locationObject.isNull("image"))){
-                image = locationObject.getString("image");
-            }
-            if((locationObject.has("distance") && !locationObject.isNull("distance"))){
-                distance = locationObject.getInt("distance");
-            }
-            else{
-                distance = 0;
 
+        if(locationArray.length() > 0){
+            for(int i = 0; i < locationArray.length(); i++) {
+                JSONObject locationObject = locationArray.getJSONObject(i);
+                String id = locationObject.getString("_id");
+                String name = locationObject.getString("name");
+                Integer rating = locationObject.getInt("rating");
+                String address = locationObject.getString("address");
+                String image = "https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/14907180_1793403247600360_1149741883844579018_n.jpg?resize=625%2C417&ssl=1";
+                Integer distance;
+                if((locationObject.has("image") && !locationObject.isNull("image"))){
+                    image = locationObject.getString("image");
+                }
+                if((locationObject.has("distance") && !locationObject.isNull("distance"))){
+                    distance = locationObject.getInt("distance");
+                }
+                else{
+                    distance = 0;
+
+                }
+                LocationList location = new LocationList(id, image, name, address, rating, distance);
+
+
+                results.add(location);
             }
-              LocationList location = new LocationList(id, image, name, address, rating, distance);
 
-
-            results.add(location);
         }
 
         for (LocationList s : results) {

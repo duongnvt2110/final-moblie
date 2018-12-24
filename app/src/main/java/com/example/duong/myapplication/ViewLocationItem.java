@@ -111,7 +111,7 @@ public class ViewLocationItem  extends AppCompatActivity {
                         if(flag_loading == false)
                         {
                             flag_loading = true;
-                            Toast.makeText(ViewLocationItem.this, "Load more", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewLocationItem.this, "Đang tải", Toast.LENGTH_SHORT).show();
                             loadMore();
                         }
                 }
