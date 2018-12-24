@@ -2,6 +2,7 @@ package com.example.duong.myapplication;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,11 +22,12 @@ public class ImageSlider extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         final Context context = container.getContext();
-        final ImageView imageView = new ImageView(context);
+        final AppCompatImageView imageView = new AppCompatImageView(context);
         container.addView(imageView);
         // Load ảnh vào ImageView bằng Glide
         Glide.with(context).asBitmap().load(urls[position])
                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
+                        .override(720,280).centerCrop()
 
                 )
                 .into(imageView);
