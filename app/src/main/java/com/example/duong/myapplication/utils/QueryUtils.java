@@ -45,7 +45,7 @@ public class QueryUtils {
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error getting data from JSON");
         }
-        Log.d("Data",locations.toString());
+
         return locations;
     }
 
@@ -54,7 +54,8 @@ public class QueryUtils {
     {
 
         ArrayList<LocationList> locations = null;
-        String requestUrl = "http://206.189.80.94:8000/api/locations/api/locations?lng=106.714081&maxDistance=5&lat=10.801440";
+        String requestUrl = "http://206.189.80.94:8000/api/locations/?lng=" + log + "&maxDistance=" + 500 +"&lat=" + lat;
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -74,7 +75,6 @@ public class QueryUtils {
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error getting data from JSON");
         }
-        Log.d("Data",locations.toString());
         return locations;
     }
 
@@ -218,11 +218,18 @@ public class QueryUtils {
             Integer rating = locationObject.getInt("rating");
             String address = locationObject.getString("address");
             String image = "https://i0.wp.com/www.ghiencaphe.com/wp-content/uploads/2016/11/14907180_1793403247600360_1149741883844579018_n.jpg?resize=625%2C417&ssl=1";
-
+            Integer distance;
             if((locationObject.has("image") && !locationObject.isNull("image"))){
                 image = locationObject.getString("image");
             }
-              LocationList location = new LocationList(id, image, name, address, rating, 100);
+            if((locationObject.has("distance") && !locationObject.isNull("distance"))){
+                distance = locationObject.getInt("distance");
+            }
+            else{
+                distance = 0;
+
+            }
+              LocationList location = new LocationList(id, image, name, address, rating, distance);
 
 
             results.add(location);

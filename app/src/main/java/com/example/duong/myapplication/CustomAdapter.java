@@ -57,6 +57,7 @@ public class CustomAdapter extends ArrayAdapter<LocationList> {
         viewHolder.rating.setTag(position);
         viewHolder.rating.setRating(locationList.getRating());
         viewHolder.name.setText(locationList.getName());
+        viewHolder.distance.setText(locationList.getDistance() + "m");
         return convertView;
     }
 

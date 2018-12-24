@@ -108,15 +108,12 @@ public class ViewLocationItem  extends AppCompatActivity {
                                  int visibleItemCount, int totalItemCount) {
                 if(firstVisibleItem+visibleItemCount == totalItemCount && totalItemCount!=0)
                 {
-                    if(end == false){
                         if(flag_loading == false)
                         {
                             flag_loading = true;
                             Toast.makeText(ViewLocationItem.this, "Load more", Toast.LENGTH_SHORT).show();
                             loadMore();
                         }
-                    }
-
                 }
 
             }
@@ -132,7 +129,6 @@ public class ViewLocationItem  extends AppCompatActivity {
         final Button btn_near = (Button) findViewById(R.id.btn_near);
         btn_near.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                type = 2;
                 Toast.makeText(ViewLocationItem.this, "Location changed: Lat: " + latitude + " Lng: "
                         + longitude, Toast.LENGTH_SHORT).show();
                 //        Add if to check permission.
@@ -155,6 +151,7 @@ public class ViewLocationItem  extends AppCompatActivity {
                         LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
 
                 if(longitude != null && latitude != null){
+                    type = 2;
                     updateLocationByDistance(longitude, latitude);
                 }
                 else{
@@ -198,11 +195,11 @@ public class ViewLocationItem  extends AppCompatActivity {
 
     private void loadMore(){
         page ++;
+
         if(type == 1){
             FecthLocationByPageTask fecthLocationByPageTask = new FecthLocationByPageTask();
             fecthLocationByPageTask.execute(page);
         }
-
 
     }
 
@@ -225,7 +222,7 @@ public class ViewLocationItem  extends AppCompatActivity {
             else
             {
                 customAdaper.addAll(data);
-
+                flag_loading = false;
             }
 
         }
